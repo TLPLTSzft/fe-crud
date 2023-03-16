@@ -28,11 +28,11 @@ function KutyaKartya(props) {
 
         </div>
         <div className="card-footer">
-          <div className="row row-cols-2">
-            <div className="row-cols-1 px-1">
+          <div className="row row-cols-sm-2">
+            <div className="row-cols-1 p-1">
               <button className="btn btn-outline-warning">Módosítás</button>
             </div>
-            <div className="row-cols-1 px-1">
+            <div className="row-cols-1 p-1">
               <button className="btn btn-outline-danger">Törlés</button>
             </div>
           </div>
