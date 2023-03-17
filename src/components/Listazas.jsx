@@ -1,33 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import KutyaKartya from "./KutyaKartya";
 
-function Listazas() {
-  const kutyakListazasa = () => {
-    fetch("https://retoolapi.dev/V8jm7s/dogs", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      // .then(Response => Response.json())
-      // .then(jsonData => {
-      //   console.log(jsonData);
-      .then(async Response => {
-        const data = await Response.json();
-        if (Response.status === 200) {
-          setKutyak(data);
-        } else if (Response.status === "404") {
-          // todo 404 hiba
-        } else {
-          // egyeb hiba kezelese
-          console.log(data.message);
-        }
-      });
-  }
-
-  const [kutyak, setKutyak] = useState([]);
+function Listazas(props) {
+  const { kutyak, onMount } = props
   useEffect(() => {
-    kutyakListazasa();
-
+    onMount();
   }, []);
   const cardList = [];
   kutyak.forEach(kutya => {
