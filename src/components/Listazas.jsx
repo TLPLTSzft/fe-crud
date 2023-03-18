@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import KutyaKartya from "./KutyaKartya";
 
 function Listazas(props) {
-  const { kutyak, onMount } = props
+  const { kutyak, onMount, modositClick } = props
   useEffect(() => {
     onMount();
   }, []);
   const cardList = [];
   kutyak.forEach(kutya => {
     cardList.push(
-      <KutyaKartya key={kutyak.id} kutya={kutya} />);
+      <KutyaKartya key={kutyak.id} kutya={kutya} afterDelete={onMount} modositClick={modositClick} />);
   });
   return (<section>
     <h2 className="pt-4 pb-2">Kutyák listája</h2>

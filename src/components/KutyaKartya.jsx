@@ -1,7 +1,21 @@
 function KutyaKartya(props) {
-  const { kutya } = props;
-  const { name, breed, age, vaccinated } = kutya;
-  // modositas es torles
+  const { kutya, afterDelete, modositClick } = props;
+  const { id, name, breed, age, vaccinated } = kutya;
+  const kutyaTorlese = () => {
+    fetch(`https://retoolapi.dev/V8jm7s/dogs/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+      },
+    }).then(async Response => {
+      if (Response.status !== 204) {
+        const data = await Response.json();
+        // alert(Response.status + " - " + data.message);
+      }
+      afterDelete();
+    });
+  };
+
   return (
     <div className="col-md-6 col-xl-4">
       <div className="card card h-100">
@@ -21,7 +35,9 @@ function KutyaKartya(props) {
               </tr>
               <tr>
                 <th>Vaccinated:</th>
-                <td>{vaccinated}</td>
+                <td>
+                  {vaccinated ? "true" : "false"}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -30,10 +46,10 @@ function KutyaKartya(props) {
         <div className="card-footer">
           <div className="row row-cols-sm-2">
             <div className="row-cols-1 p-1">
-              <button className="btn btn-outline-warning">Módosítás</button>
+              <a href="#ujRekord" className="btn btn-outline-warning" onClick={() => { modositClick(id) }}>Módosítás</a>
             </div>
             <div className="row-cols-1 p-1">
-              <button className="btn btn-outline-danger">Törlés</button>
+              <button className="btn btn-outline-danger" onClick={() => { kutyaTorlese(); }}>Törlés</button>
             </div>
           </div>
         </div>
